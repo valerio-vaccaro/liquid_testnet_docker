@@ -1,0 +1,3 @@
+[submodule "liquid-faucet"]
+	path = liquid-faucet
+	url = https://github.com/valerio-vaccaro/liquid-faucet

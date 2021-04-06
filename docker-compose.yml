@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  liquidtestnet:
+    image: blockstream/elementsd
+    volumes:
+      - type: bind
+        source: ./configs/elements
+        target: /conf
+      - type: bind
+        source: ./chain
+        target: /liquiddir
+    command: elementsd -conf=/conf/liquid.conf
+    network_mode: host
+
+  faucet:
+    build:
+      context: .
+      dockerfile: ./Dockerfile_faucet
+      network: host
+    image: faucet
+    command: python3 faucet.py
+    depends_on:
+      - liquidtestnet
+    ports:
+      - "0.0.0.0:80:80"

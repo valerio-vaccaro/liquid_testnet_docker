@@ -1,0 +1,23 @@
+FROM python:3.7-alpine
+
+# Manually build and install wallycore
+RUN apk add --update bash alpine-sdk autoconf automake libtool swig \
+  && git clone https://github.com/ElementsProject/libwally-core.git \
+  && cd libwally-core \
+  && git checkout release_0.8.2 \
+  && git submodule init \
+  && git submodule sync --recursive \
+  && git submodule update --init --recursive \
+  && ln -sf /usr/local/bin/python3.7 /usr/local/bin/python3.7.5 \
+  && ln -sf /usr/local/bin/python3.7 /usr/local/bin/python3.7.6 \
+  && ln -sf /usr/local/bin/python3.7 /usr/local/bin/python3.7.7 \
+  && ln -sf /usr/local/bin/python3.7 /usr/local/bin/python3.7.8 \
+  && ln -sf /usr/local/bin/python3.7 /usr/local/bin/python3.7.9 \
+  && ln -sf /usr/local/bin/python3.7 /usr/local/bin/python3.7.10 \
+  && pip install .
+
+WORKDIR /app
+RUN apk add zlib zlib-dev libjpeg jpeg-dev
+COPY ./liquid-faucet .
+copy ./configs/liquid-faucet/ .
+RUN pip3 install -r requirements.txt

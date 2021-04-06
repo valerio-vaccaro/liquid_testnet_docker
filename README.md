@@ -1,2 +1,7 @@
-# liquid_testnet_docker
-Docker for Liquid testnet with faucet and asset issuer 
+# Liquid testnet docker
+Docker-compose file for Liquid testnet with faucet and asset issuer .
+
+## How to use
+Start with `docker-compose up`
+
+Stop with `docker-compose down`
